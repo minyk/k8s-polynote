@@ -17,7 +17,7 @@ spec:
       serviceAccountName: polynote
       containers:
       - name: polynote
-        image: minyk/polynote:0.3.7-2.12-spark3.0
+        image: minyk/polynote:0.3.8-2.12-spark3.0
         args: ['--config', '/opt/config/config.yaml']
         env:
         - name: PYSPARK_ALLOW_INSECURE_GATEWAY

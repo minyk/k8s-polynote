@@ -3,7 +3,7 @@ k8s-polynote
 
 [Polynote](https://github.com/polynote/polynote) On Kubernetes
 
-* Polynote 0.3.7
+* Polynote 0.3.8
 * Spark 3.0.1-SNAPSHOT (branch-3.0)
 * Hadoop 3.2
  * hadoop-aws-3.2.0
@@ -40,6 +40,6 @@ $ docker build . -f kubernetes/dockerfiles/spark/Dockerfile -t minyk/spark:3.0.1
 from official image:
 ```
 $ cd docker/polynote
-$ docker build . -t minyk/polynote:0.3.7-2.12-spark3.0 \
-    --build-arg POLYNOTE_VERSION=0.3.7 --build-arg SCALA_VERSION=2.12
+$ docker build . -t minyk/polynote:0.3.8-2.12-spark3.0 \
+    --build-arg POLYNOTE_VERSION=0.3.8 --build-arg SCALA_VERSION=2.12
 ```
