@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ include "polynote.fullname" . }}-headless
+  labels:
+    app.kubernetes.io/name: {{ include "polynote.name" . }}
+    helm.sh/chart: {{ include "polynote.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  clusterIP: None
+  ports:
+    - name: spark-driver
+      port: 30000
+  selector:
+    app.kubernetes.io/name: {{ include "polynote.name" . }}
+    helm.sh/chart: {{ include "polynote.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}

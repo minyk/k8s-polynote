@@ -1,0 +1,16 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ include "polynote.fullname" . }}-role-binding
+  labels:
+    app.kubernetes.io/name: {{ include "polynote.name" . }}
+    helm.sh/chart: {{ include "polynote.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+subjects:
+- kind: ServiceAccount
+  name: {{ include "polynote.fullname" . }}
+roleRef:
+  kind: Role
+  name: {{ include "polynote.fullname" . }}-role
+  apiGroup: rbac.authorization.k8s.io

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: polynote
+description: A Helm chart for ploynote
+type: application
+version: 0.1.0
+engine: gotpl

@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "polynote.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "polynote.name" . }}
+    helm.sh/chart: {{ include "polynote.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "polynote.name" . }}
+      helm.sh/chart: {{ include "polynote.chart" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/managed-by: {{ .Release.Service }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "polynote.name" . }}
+        helm.sh/chart: {{ include "polynote.chart" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/managed-by: {{ .Release.Service }}
+    spec:
+      serviceAccountName: {{ include "polynote.fullname" . }}
+      containers:
+      - name: polynote
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        args: ['--config', '/opt/config/config.yaml']
+        env:
+        - name: PYSPARK_ALLOW_INSECURE_GATEWAY
+          value: '1'
+        ports:
+        - containerPort: 8192
+        volumeMounts:
+        - name: config-volume
+          mountPath: /opt/config
+        - name: notebooks
+          mountPath: /opt/polynote/notebooks
+      volumes:
+      - name: config-volume
+        secret:
+          secretName: {{ include "polynote.fullname" . }}
+      - name: notebooks
+        emptyDir: {}
