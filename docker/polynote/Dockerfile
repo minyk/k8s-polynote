@@ -8,8 +8,6 @@ USER root
 
 COPY install_spark.sh .
 RUN ./install_spark.sh
-COPY install_hadoop-aws.sh .
-RUN ./install_hadoop-aws.sh
 
 ENV SPARK_HOME="/opt/spark"
 ENV HADOOP_HOME="/opt/hadoop-3.2.0"
