@@ -25,23 +25,32 @@ spec:
     spec:
       serviceAccountName: {{ include "polynote.fullname" . }}
       containers:
-      - name: polynote
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
-        args: ['--config', '/opt/config/config.yaml']
-        env:
-        - name: PYSPARK_ALLOW_INSECURE_GATEWAY
-          value: '1'
-        ports:
-        - containerPort: 8192
-        volumeMounts:
-        - name: config-volume
-          mountPath: /opt/config
-        - name: notebooks
-          mountPath: /opt/polynote/notebooks
+        - name: polynote
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args: ['--config', '/opt/config/config.yaml']
+          env:
+            - name: PYSPARK_ALLOW_INSECURE_GATEWAY
+              value: '1'
+          ports:
+            - containerPort: 8192
+          volumeMounts:
+            - name: config-volume
+              mountPath: /opt/config
+            - name: notebooks
+              mountPath: /opt/polynote/notebooks
+            {{- if .Values.extraVolumeMounts -}}
+              {{ toYaml .Values.extraVolumeMounts | nindent 12}}
+            {{- end }}
+{{- if .Values.extraContainers }}
+{{ toYaml .Values.extraContainers | indent 8}}
+{{- end }}
       volumes:
-      - name: config-volume
-        secret:
-          secretName: {{ include "polynote.fullname" . }}
-      - name: notebooks
-        emptyDir: {}
+        - name: config-volume
+          secret:
+            secretName: {{ include "polynote.fullname" . }}
+        - name: notebooks
+          emptyDir: {}
+{{- if .Values.extraVolumes }}
+{{ toYaml .Values.extraVolumes | indent 8}}
+{{- end }}
