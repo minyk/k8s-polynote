@@ -1,6 +1,6 @@
 image:
   repository: minyk/polynote
-  tag: 0.3.9-2.12-spark3.0
+  tag: 0.3.10-2.12-spark3.0
   pullPolicy: IfNotPresent
 
 nameOverride: ""
@@ -135,7 +135,7 @@ polynote:
   spark:
     properties:
       spark.master: k8s://https://kubernetes.default.svc
-      spark.kubernetes.container.image: minyk/spark:3.0.1-SNAPSHOT
+      spark.kubernetes.container.image: minyk/spark:3.0.1-SNAPSHOT-hadoop-3.2.1-delta-0.6.1
       spark.driver.host: polynote-polynote-headless
       spark.driver.port: 30000
   #    spark.driver.memory: 28g

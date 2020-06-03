@@ -3,19 +3,15 @@ k8s-polynote
 
 [Polynote](https://github.com/polynote/polynote) On Kubernetes
 
-* Polynote 0.3.8
+* Polynote 0.3.10
 * Spark 3.0.1-SNAPSHOT (branch-3.0)
-* Hadoop 3.2
- * hadoop-aws-3.2.0
+* Hadoop 3.2.1
+ * hadoop-aws-3.2.1
 
 # Deploy
 
 ```
-$ kubectl apply -f configmap.yaml
-$ kubectl apply -f serviceaccount.yaml
-$ kubectl apply -f service.yaml
-$ kubectl apply -f headless.yaml
-$ kubectl apply -f deployment.yaml
+$ helm install --namespace default polynote .
 ```
 
 
