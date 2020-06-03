@@ -14,6 +14,12 @@ k8s-polynote
 $ helm install --namespace default polynote .
 ```
 
+### Deploy using package on the github pages
+
+```
+$ helm install polynote https://minyk.github.io/k8s-polynote/polynote-0.1.0.tgz
+```
+
 
 # Access
 
