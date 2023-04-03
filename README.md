@@ -3,10 +3,10 @@ k8s-polynote
 
 [Polynote](https://github.com/polynote/polynote) On Kubernetes
 
-* Polynote 0.3.10
-* Spark 3.0.1-SNAPSHOT (branch-3.0)
-* Hadoop 3.2.1
- * hadoop-aws-3.2.1
+* Polynote 0.5.1
+* Spark 3.3.1
+* Hadoop 3.3.2
+ * hadoop-aws-3.3.2
 
 # Deploy
 
@@ -17,7 +17,7 @@ $ helm install --namespace default polynote .
 ### Deploy using package on the github pages
 
 ```
-$ helm install polynote https://minyk.github.io/k8s-polynote/polynote-0.1.0.tgz
+$ helm install polynote https://minyk.github.io/k8s-polynote/polynote-0.2.0.tgz
 ```
 
 
@@ -42,8 +42,8 @@ $ docker build . -f kubernetes/dockerfiles/spark/Dockerfile -t minyk/spark:3.0.1
 from official image:
 ```
 $ cd docker/polynote
-$ docker build . -t minyk/polynote:0.3.8-2.12-spark3.0 \
-    --build-arg POLYNOTE_VERSION=0.3.8 --build-arg SCALA_VERSION=2.12
+$ docker build . -t minyk/polynote:0.5.1-2.12-spark3.3 \
+    --build-arg POLYNOTE_VERSION=0.5.1 --build-arg SCALA_VERSION=2.12
 ```
 
 # Advanced Deploy
